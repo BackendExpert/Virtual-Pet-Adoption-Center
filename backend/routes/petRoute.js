@@ -18,8 +18,8 @@ router.put('/pet/:id', petController.updatePet)
 // Adopt a Pet
 router.patch('/pet/:id/adopt', petController.petAdopt)
 
-
-
+// delete pet
+router.delete('/pet/:id', petController.deletePet)
 
 
 module.exports = router;
