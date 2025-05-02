@@ -1,7 +1,7 @@
 const Pet = require("../models/petModel");
 
 const petController = {
-    
+
     // create pet
 
     createPet: async(req, res) => {
@@ -98,7 +98,46 @@ const petController = {
                 return res.json({ Error: "Pet Cannot find by Give ID" })
             }
 
+            // check at least one input feild have value
 
+            if(name === undefined && species === undefined && age === undefined && personality === undefined){
+                return  res.json({ Error: "Please Provid at least one input..."})
+            }
+
+            // update only feild that data have
+
+            if (name !== undefined) checkpet.name = name;
+            if (species !== undefined) checkpet.species = species;
+            if (age !== undefined) checkpet.age = age;
+            if (personality !== undefined) checkpet.personality = personality;
+
+            const updatepet = await checkpet.save()
+
+            if(updatepet) {
+                return res.json({ Status: "Success", Message: "Pet Updated Success"})
+            }
+            else{
+                return res.json({ Error: "Internal server Error while Updating the Pet..."})
+            }
+        }
+        catch(err){
+            console.log(err)
+        }
+    },
+
+    // adoptPet
+
+    petAdopt: async(req, res) => {
+        try{
+            const id = req.params.id
+            
+            const checkpet = await Pet.findById(id)
+
+            if(!checkpet){
+                return res.json({ Error: "No Pet Found"})
+            }
+
+            
         }
         catch(err){
             console.log(err)

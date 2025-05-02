@@ -12,6 +12,8 @@ router.get('/pet', petController.allpets)
 // get single pet
 router.get('/pet/:id', petController.getSinglePet)
 
+// update pet
+router.put('/pet/:id', petController.updatePet)
 
 
 
