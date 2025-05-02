@@ -1,6 +1,9 @@
 const Pet = require("../models/petModel");
 
 const petController = {
+    
+    // create pet
+
     createPet: async(req, res) => {
         try{
             // get user inputs
@@ -95,7 +98,7 @@ const petController = {
                 return res.json({ Error: "Pet Cannot find by Give ID" })
             }
 
-            
+
         }
         catch(err){
             console.log(err)
