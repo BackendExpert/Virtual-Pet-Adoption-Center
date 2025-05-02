@@ -137,7 +137,46 @@ const petController = {
                 return res.json({ Error: "No Pet Found"})
             }
 
-            
+            checkpet.adopted = true
+            checkpet.adoption_date = new Date() 
+
+            const updatePetAdopt = await checkpet.save()
+
+            if(updatePetAdopt){
+                return  res.json({ Status: "Success", Message: "Pet Adopt Updated Success"})
+            }
+            else{
+                return res.json({ Error: "Error While Updating Pet"})
+            }
+
+        }
+        catch(err){
+            console.log(err)
+        }
+    },
+
+    // delete pet
+    
+    deletePet: async(req, res) => {
+        try{
+            const id = req.params.id
+
+            const checkpet = await Pet.findById(id)
+
+            if(!checkpet){
+                return res.json({ Error: "Pet Not Found"})
+            }
+
+            // delete pet
+
+            const petdelete = await Pet.findByIdAndDelete(id)
+
+            if(petdelete){
+                return res.json({ Status:"Success", Message: "Pet Deleted Success"})
+            }
+            else{
+                return res.json({ Error: "Error While Deleting Pet"})
+            }
         }
         catch(err){
             console.log(err)

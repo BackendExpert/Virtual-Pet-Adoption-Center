@@ -53,7 +53,6 @@ const PetSchema = new mongoose.Schema({
     },
     adoption_date: {
         type: Date,
-        default: new Date()
     }
 }, {timestamps: true }); //timestamps can get created date and time and also latest update date and time
 

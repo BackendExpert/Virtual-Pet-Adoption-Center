@@ -15,6 +15,11 @@ router.get('/pet/:id', petController.getSinglePet)
 // update pet
 router.put('/pet/:id', petController.updatePet)
 
+// Adopt a Pet
+router.patch('/pet/:id/adopt', petController.petAdopt)
+
+
+
 
 
 module.exports = router;
