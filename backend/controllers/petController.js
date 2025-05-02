@@ -5,11 +5,12 @@ const petController = {
         try{
             // get user inputs
 
-            // i use this 3 inputs because of personality, mood, adopted and adoption_date have defult value so no need to add by adder 
+            // i use this 3 inputs because of mood, adopted and adoption_date have defult value so no need to add by adder 
             const {
                 name,
                 species,
-                age
+                age,
+                personality
             } = req.body
 
             // check the pet is already in database
@@ -24,7 +25,8 @@ const petController = {
             const newPet = new Pet({
                 name: name,
                 species: species,
-                age: age
+                age: age,
+                personality: personality
             })
 
             const resultNewPet = await newPet.save()
@@ -41,6 +43,8 @@ const petController = {
         }
     },
 
+    // get all pets
+
     allpets: async(req, res) => {
         try{
             const pets = await Pet.find()
@@ -50,7 +54,54 @@ const petController = {
         catch(err){
             console.log(err)
         }
+    },
+
+    // get one pet according to id
+
+    getSinglePet: async(req, res) => {
+        try{
+            const id = req.params.id
+
+            const getpet = await Pet.findById(id)
+
+            if(getpet){
+                return res.json({ Result: getpet, Message: "Get pet"})
+            }
+            else{
+                return res.json({ Error: "No Pet Found by ID"})
+            }
+        }
+        catch(err){
+            console.log(err)
+        }
+    },
+
+    // update pet
+
+    updatePet: async(req, res) => {
+        try{    
+            const id = req.params.id
+
+            const {
+                name,
+                species,
+                age,
+                personality
+            } = req.body
+
+            const checkpet = await Pet.findById(id)
+
+            if(!checkpet){
+                return res.json({ Error: "Pet Cannot find by Give ID" })
+            }
+
+            
+        }
+        catch(err){
+            console.log(err)
+        }
     }
+
 };
 
 module.exports = petController;

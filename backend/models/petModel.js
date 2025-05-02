@@ -4,7 +4,6 @@ const PetSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique: true
     },
     species: {
         type: String,
