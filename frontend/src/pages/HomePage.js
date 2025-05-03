@@ -7,7 +7,7 @@ const HomePage = () => {
 
   return (
     <div className="container">
-      <h1 className="title">🐾 Virtual Pet Adoption Center</h1>
+      <h1 className="title">Virtual Pet Adoption Center</h1>
 
       <div className="top-bar">
 
