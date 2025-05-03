@@ -11,6 +11,9 @@ const router = express.Router();
 // create pet
 router.post('/', petController.createPet)
 
+// filter pet by mood
+router.get('/filter', petController.filterPet)
+
 // get all pets
 router.get('/', petController.allpets)
 
@@ -26,7 +29,5 @@ router.patch('/:id/adopt', petController.petAdopt)
 // delete pet
 router.delete('/:id', petController.deletePet)
 
-// filter pet by mood
-router.get('/filter', petController.filterPet)
 
 module.exports = router;

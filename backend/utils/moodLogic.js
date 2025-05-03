@@ -14,11 +14,11 @@ function getMood(createAt) {
 async function UpdateMoodforAllPets() {
     const pets = await Pet.find()
 
-    for (const pet in pets) {
-        const mood = getMood(pet.mood)
-        if(pet.mood !== mood){
-            pet.mood = mood
-            await pet.save()
+    for (const pet of pets) {
+        const mood = getMood(pet.createdAt);
+        if (pet.mood !== mood) {
+            pet.mood = mood;
+            await pet.save();
         }
     }
 }
