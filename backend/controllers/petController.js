@@ -181,6 +181,29 @@ const petController = {
         catch(err){
             console.log(err)
         }
+    },
+
+    // Filter Pets by Mood
+
+    filterPet: async(req, res) => {
+        try{
+            const mood = req.query
+
+            if(!mood){
+                return re.json({ Error: "Mood is Requrired"})
+            }
+
+            const getpet = await Pet.find({ mood: mood })
+
+            if(getpet.length === 0){
+                return res.json({ Error: "No Pet Found by given specified mood"})
+            }
+
+            return res.json({ Result: getpet, Message: "Pets found..."})
+        }
+        catch(err){
+            console.log(err)
+        }
     }
 
 };
