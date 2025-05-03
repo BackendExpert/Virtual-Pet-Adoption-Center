@@ -32,7 +32,7 @@ const PetSchema = new mongoose.Schema({
                 'Protective', 
                 'Loyal', 
                 'Independent'
-            ], // only these personality can add to system (no Defult is Friendly)
+            ], // only these personality can add to system (Defult is Friendly)
         default: 'Friendly',
         required: true
     },
