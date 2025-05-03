@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import DefultInput from './Form/DefultInput'
 import { createPet } from '../services/api';
-import { replace, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import DropDown from './Form/DropDown';
 import DefultBtn from './Button/DefultBtn';
 
