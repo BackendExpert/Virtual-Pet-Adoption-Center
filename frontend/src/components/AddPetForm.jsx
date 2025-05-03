@@ -77,6 +77,7 @@ const AddPetForm = () => {
                             </div>
                             <div className="">
                                 <DefultInput
+                                    type={'number'}
                                     label={"Enter Pet Age"}
                                     name={'age'}
                                     value={petdata.age}

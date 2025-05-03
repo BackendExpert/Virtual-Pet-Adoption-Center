@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getOnePet, updatePet } from '../services/api';  // ✅ Ensure correct imports
+import { getOnePet, updatePet } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 import { FaCircleXmark } from "react-icons/fa6";
 import DefultInput from './Form/DefultInput';

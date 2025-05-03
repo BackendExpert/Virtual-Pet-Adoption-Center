@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { adoptPet, getallpets } from '../services/api';
+import { adoptPet, getallpets, deletePet } from '../services/api';
 import { formatDate } from '../utils/Helper';
 import { MdMenu, MdDashboard } from "react-icons/md";
 import FilterBar from './FilterBar';
+import '../App.css';
 
 const PetList = ({ onPetClick }) => {
     const [petdata, setpetdata] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [btndatavalue, setbtndatavalue] = useState("list");
     const [filterPersonality, setFilterPersonality] = useState('');
+    const [deletingPetId, setDeletingPetId] = useState(null);
+    const [adoptingPetId, setAdoptingPetId] = useState(null);
 
     useEffect(() => {
         const fetchPets = async () => {
@@ -28,8 +31,6 @@ const PetList = ({ onPetClick }) => {
         fetchPets();
     }, []);
 
-    // for filter pets
-
     useEffect(() => {
         if (!filterPersonality) {
             setFilteredData(petdata);
@@ -38,10 +39,38 @@ const PetList = ({ onPetClick }) => {
         }
     }, [petdata, filterPersonality]);
 
-    // when the user click the button automtically srcoll up
-    // because of the view and update form will be appear in top of the page after add pet
     const scrollToTop = () => {
         window.scrollTo({ top: 400, behavior: 'smooth' });
+    };
+
+    const handleDelete = async (id) => {
+        setDeletingPetId(id);
+        try {
+            await deletePet(id);
+            setTimeout(() => {
+                setpetdata(prev => prev.filter(pet => pet._id !== id));
+                setDeletingPetId(null);
+            }, 500); // Wait for animation to finish
+        } catch (error) {
+            console.error("Error deleting pet:", error);
+            setDeletingPetId(null);
+        }
+    };
+
+    const handleAdopt = async (id) => {
+        setAdoptingPetId(id);
+        try {
+            await adoptPet(id);
+            setpetdata(prev =>
+                prev.map(pet =>
+                    pet._id === id ? { ...pet, adopted: true } : pet
+                )
+            );
+            setTimeout(() => setAdoptingPetId(null), 500); // Remove pulse effect
+        } catch (error) {
+            console.error("Error adopting pet:", error);
+            setAdoptingPetId(null);
+        }
     };
 
     return (
@@ -64,8 +93,6 @@ const PetList = ({ onPetClick }) => {
                 </div>
             </div>
 
-
-
             {btndatavalue === 'list' ? (
                 <div className='bg-white mt-4 p-4 shadow-lg rounded-lg'>
                     <table className="w-full">
@@ -85,7 +112,10 @@ const PetList = ({ onPetClick }) => {
                         <tbody>
                             {filteredData.length > 0 ? (
                                 filteredData.map((data, index) => (
-                                    <tr className='h-16 border-b border-gray-300' key={index}>
+                                    <tr
+                                        key={index}
+                                        className={`h-16 border-b border-gray-300 pet-card transition-opacity duration-500 ${deletingPetId === data._id ? 'opacity-0' : 'opacity-100'} ${adoptingPetId === data._id ? 'animate-pulse' : ''}`}
+                                    >
                                         <td className='md:hidden table-cell'>
                                             <div className="py-4">
                                                 <p className="font-semibold">Pet Name: <span className='text-blue-500'>{data.name}</span></p>
@@ -93,12 +123,7 @@ const PetList = ({ onPetClick }) => {
                                                 <p className="font-semibold">Age : <span className='text-blue-500'>{data.age}</span></p>
                                                 <p className="font-semibold">Personality: <span className='text-blue-500'>{data.personality}</span></p>
                                                 <div className="font-semibold">
-                                                    {
-                                                        data.adopted === false ?
-                                                            <div className="text-green-500">Available</div>
-                                                            :
-                                                            <div className="text-red-500">Adopted</div>
-                                                    }
+                                                    {data.adopted ? <div className="text-red-500">Adopted</div> : <div className="text-green-500">Available</div>}
                                                 </div>
                                             </div>
                                         </td>
@@ -108,30 +133,29 @@ const PetList = ({ onPetClick }) => {
                                         <td className='text-center md:table-cell hidden'>{data.age}</td>
                                         <td className='text-center md:table-cell hidden'>{data.personality}</td>
                                         <td className='text-center md:table-cell hidden font-semibold'>
-                                            {
-                                                data.adopted === false ?
-                                                    <div className="text-green-500">Available</div>
-                                                    :
-                                                    <div className="text-red-500">Adopted</div>
-                                            }
+                                            {data.adopted ? <div className="text-red-500">Adopted</div> : <div className="text-green-500">Available</div>}
                                         </td>
                                         <td className='md:table-cell hidden text-center'>{data.adoption_date ? formatDate(data.adoption_date) : "-"}</td>
-                                        <td className='text-center'>
+                                        <td className='text-center space-x-2'>
                                             <button
                                                 className={`text-white px-3 py-1 rounded ${data.adopted ? 'text-red-500 font-semibold' : 'bg-green-500'}`}
-                                                onClick={() => adoptPet(data._id)}
+                                                onClick={() => handleAdopt(data._id)}
                                                 disabled={data.adopted}
                                             >
                                                 {data.adopted ? "Adopted" : "Adopt"}
                                             </button>
-
                                             <button
                                                 onClick={() => {
                                                     scrollToTop();
                                                     onPetClick(data._id);
                                                 }}
-                                                className='ml-2 bg-blue-500 text-white rounded py-1 px-4 duration-500 hover:bg-blue-500'>
+                                                className='bg-blue-500 text-white rounded py-1 px-3 hover:bg-blue-600'>
                                                 View
+                                            </button>
+                                            <button
+                                                onClick={() => handleDelete(data._id)}
+                                                className='bg-red-500 text-white rounded py-1 px-3 hover:bg-red-600'>
+                                                Delete
                                             </button>
                                         </td>
                                     </tr>
@@ -148,38 +172,45 @@ const PetList = ({ onPetClick }) => {
                 </div>
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4">
-                    {filteredData.length > 0 ? (
-                        filteredData.map((data, index) => (
-                            <div key={index} className="bg-white p-4 rounded-lg shadow-md">
-                                <h2 className="text-lg font-bold text-gray-700">{data.name}</h2>
-                                <p className="text-gray-600">Species: {data.species}</p>
-                                <p className="text-gray-600">Age: {data.age}</p>
-                                <p className="text-gray-600">Personality: {data.personality}</p>
-                                <p className={`font-semibold ${data.adopted ? 'text-red-500' : 'text-green-500'}`}>
-                                    {data.adopted ? "Adopted" : "Available"}
-                                </p>
-                                <p className="text-gray-500 text-sm">Adoption Date: {data.adoption_date ? formatDate(data.adoption_date) : '-'}</p>
+                    {filteredData.map((data, index) => (
+                        <div
+                            key={index}
+                            className={`bg-white p-4 rounded-lg shadow-md pet-card transition-opacity duration-500 
+                            ${deletingPetId === data._id ? 'opacity-0' : 'opacity-100'} 
+                            ${adoptingPetId === data._id ? 'animate-pulse' : ''}`}
+                        >
+                            <h2 className="text-lg font-bold text-gray-700">{data.name}</h2>
+                            <p className="text-gray-600">Species: {data.species}</p>
+                            <p className="text-gray-600">Age: {data.age}</p>
+                            <p className="text-gray-600">Personality: {data.personality}</p>
+                            <p className={`font-semibold ${data.adopted ? 'text-red-500' : 'text-green-500'}`}>
+                                {data.adopted ? "Adopted" : "Available"}
+                            </p>
+                            <p className="text-gray-500 text-sm">Adoption Date: {data.adoption_date ? formatDate(data.adoption_date) : '-'}</p>
+                            <div className="mt-4 space-y-2">
                                 <button
-                                    className={`mt-3 w-full py-2 rounded text-white ${data.adopted ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'}`}
-                                    onClick={() => adoptPet(data._id)}
+                                    className={`w-full py-2 rounded text-white ${data.adopted ? 'bg-gray-400' : 'bg-green-500'}`}
+                                    onClick={() => handleAdopt(data._id)}
                                     disabled={data.adopted}
                                 >
                                     {data.adopted ? "Adopted" : "Adopt"}
                                 </button>
-
                                 <button
                                     onClick={() => {
                                         scrollToTop();
                                         onPetClick(data._id);
                                     }}
-                                    className='mt-1 w-full bg-blue-500 text-white rounded py-1 px-4 duration-500 hover:bg-blue-500'>
+                                    className='w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600'>
                                     View
                                 </button>
+                                <button
+                                    onClick={() => handleDelete(data._id)}
+                                    className='w-full py-2 bg-red-500 text-white rounded hover:bg-red-600'>
+                                    Delete
+                                </button>
                             </div>
-                        ))
-                    ) : (
-                        <p className="text-center text-gray-500 col-span-full">No pets available</p>
-                    )}
+                        </div>
+                    ))}
                 </div>
             )}
         </div>

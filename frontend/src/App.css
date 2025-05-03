@@ -1,0 +1,17 @@
+/* Define fade-out animation */
+@keyframes fadeOut {
+  from {
+      opacity: 1;
+  }
+  to {
+      opacity: 0;
+  }
+}
+
+.pet-card {
+  transition: opacity 0.5s ease-in-out; /* Apply smooth transition for fade */
+}
+
+.pet-card.fade-out {
+  animation: fadeOut 0.5s forwards; /* Trigger fade-out animation */
+}
