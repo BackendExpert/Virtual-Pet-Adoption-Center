@@ -4,7 +4,7 @@ import { formatDate } from '../utils/Helper';
 import { MdMenu, MdDashboard } from "react-icons/md";
 import FilterBar from './FilterBar';
 
-const PetList = () => {
+const PetList = ({ onPetClick }) => {
     const [petdata, setpetdata] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [btndatavalue, setbtndatavalue] = useState("list");
@@ -27,6 +27,8 @@ const PetList = () => {
 
         fetchPets();
     }, []);
+
+    // for filter pets
 
     useEffect(() => {
         if (!filterPersonality) {
@@ -117,7 +119,9 @@ const PetList = () => {
                                                 {data.adopted ? "Adopted" : "Adopt"}
                                             </button>
 
-                                            <button className='ml-2 bg-blue-500 text-white rounded py-1 px-4 duration-500 hover:bg-blue-500'>
+                                            <button
+                                                onClick={() => onPetClick(data._id)}
+                                                className='ml-2 bg-blue-500 text-white rounded py-1 px-4 duration-500 hover:bg-blue-500'>
                                                 View
                                             </button>
                                         </td>
@@ -152,6 +156,12 @@ const PetList = () => {
                                     disabled={data.adopted}
                                 >
                                     {data.adopted ? "Adopted" : "Adopt"}
+                                </button>
+
+                                <button
+                                    onClick={() => onPetClick(data._id)}
+                                    className='mt-1 w-full bg-blue-500 text-white rounded py-1 px-4 duration-500 hover:bg-blue-500'>
+                                    View
                                 </button>
                             </div>
                         ))
