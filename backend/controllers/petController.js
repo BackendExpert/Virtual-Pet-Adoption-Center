@@ -187,7 +187,8 @@ const petController = {
 
     filterPet: async(req, res) => {
         try{
-            const mood = req.query
+            const mood = req.query.mood
+
 
             if(!mood){
                 return re.json({ Error: "Mood is Requrired"})
