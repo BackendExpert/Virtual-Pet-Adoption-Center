@@ -38,6 +38,12 @@ const PetList = ({ onPetClick }) => {
         }
     }, [petdata, filterPersonality]);
 
+    // when the user click the button automtically srcoll up
+    // because of the view and update form will be appear in top of the page after add pet
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     return (
         <div className="mt-4">
             <div className="my-4">
@@ -120,7 +126,10 @@ const PetList = ({ onPetClick }) => {
                                             </button>
 
                                             <button
-                                                onClick={() => onPetClick(data._id)}
+                                                onClick={() => {
+                                                    scrollToTop();
+                                                    onPetClick(data._id);
+                                                }}
                                                 className='ml-2 bg-blue-500 text-white rounded py-1 px-4 duration-500 hover:bg-blue-500'>
                                                 View
                                             </button>
@@ -159,7 +168,10 @@ const PetList = ({ onPetClick }) => {
                                 </button>
 
                                 <button
-                                    onClick={() => onPetClick(data._id)}
+                                    onClick={() => {
+                                        scrollToTop();
+                                        onPetClick(data._id);
+                                    }}
                                     className='mt-1 w-full bg-blue-500 text-white rounded py-1 px-4 duration-500 hover:bg-blue-500'>
                                     View
                                 </button>
