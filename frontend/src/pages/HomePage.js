@@ -2,6 +2,8 @@
 import React from 'react';
 
 import '../styles/global.css';
+import AddPetForm from '../components/AddPetForm';
+import PetList from '../components/PetList';
 
 const HomePage = () => {
 
@@ -9,14 +11,11 @@ const HomePage = () => {
     <div className="container">
       <h1 className="title">Virtual Pet Adoption Center</h1>
 
-      <div className="top-bar">
-
-        <button
-          className="add-button"
-
-        >
-            hi all
-        </button>
+      <div className="">
+        <AddPetForm />        
+      </div>
+      <div className=''>
+        <PetList />
       </div>
 
 

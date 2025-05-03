@@ -29,7 +29,7 @@ export const deletePet = async (id) => {
 
 // adoptPet
 export const adoptPet = async (id) => {
-    return await axios.patch(`${API_BASE}/${id}/adopt`)
+    return await axios.patch(`${API_BASE_URL}/${id}/adopt`)
 }
 
 // filter my mood pet
