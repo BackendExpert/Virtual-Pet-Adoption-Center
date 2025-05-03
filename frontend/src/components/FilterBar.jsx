@@ -10,8 +10,10 @@ const FilterBar = ({ selected, onChange }) => {
         { label: 'Shy', value: 'Shy' },
         { label: 'Aggressive', value: 'Aggressive' },
         { label: 'Calm', value: 'Calm' },
+        { label: 'Lazy', value: 'Lazy' },
         { label: 'Energetic', value: 'Energetic' },
-        { label: 'Loyal', value: 'Loyal' }
+        { label: 'Loyal', value: 'Loyal' },
+        { label: 'Independent', value: 'Independent' }
     ];
 
     return (

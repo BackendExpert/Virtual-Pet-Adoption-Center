@@ -27,6 +27,7 @@ const AddPetForm = () => {
         e.preventDefault();
 
         try {
+            console.log(petdata)
             const response = await createPet(petdata);
 
             if (response.data.Status === "Success") {
@@ -63,6 +64,7 @@ const AddPetForm = () => {
                             </div>
                             <div className="">
                                 <Dropdown
+                                    onChange={handleInputChange}
                                     label="Select Species"
                                     name="species"
                                     options={[
@@ -75,9 +77,9 @@ const AddPetForm = () => {
                             </div>
                             <div className="">
                                 <DefultInput
-                                    label={"Enter Pet Name"}
-                                    name={'name'}
-                                    value={petdata.name}
+                                    label={"Enter Pet Age"}
+                                    name={'age'}
+                                    value={petdata.age}
                                     required
                                     placeholder={"Pet age"}
                                     onChange={handleInputChange}
@@ -87,8 +89,8 @@ const AddPetForm = () => {
                                 <Dropdown
                                     label="Select Personality"
                                     name="personality"
+                                    onChange={handleInputChange}
                                     options={[
-                                        { value: "", label: "Select Faculty" },
                                         { value: "Friendly", label: "Friendly" },
                                         { value: "Shy", label: "Shy" },
                                         { value: "Playful", label: "Playful" },
