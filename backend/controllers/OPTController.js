@@ -1,4 +1,4 @@
-const OPTquizController = {
+const OPTController = {
     // get result of quiz
     getQuizResult: async(req, res) => {
         try{
@@ -20,4 +20,4 @@ const OPTquizController = {
     }
 };
 
-module.exports = OPTquizController;
+module.exports = OPTController;
