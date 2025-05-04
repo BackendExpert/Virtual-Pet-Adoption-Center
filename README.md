@@ -9,6 +9,15 @@ This is a full-stack web application developed using Node.js (Express) for the b
 -
 - - backend
 - - frontend
+- - ScreenShots (all Screen shot of the system)
 
 
+## 🚀 Setup Instructions
+1. Clone the Repository
 
+```bash
+
+    git clone https://github.com/your-username/node-react-crud-app.git
+    cd node-react-crud-app
+
+```
