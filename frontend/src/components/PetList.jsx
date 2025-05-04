@@ -138,13 +138,6 @@ const PetList = ({ onPetClick }) => {
                                         <td className='md:table-cell hidden text-center'>{data.adoption_date ? formatDate(data.adoption_date) : "-"}</td>
                                         <td className='text-center space-x-2'>
                                             <button
-                                                className={`text-white px-3 py-1 rounded ${data.adopted ? 'text-red-500 font-semibold' : 'bg-green-500'}`}
-                                                onClick={() => handleAdopt(data._id)}
-                                                disabled={data.adopted}
-                                            >
-                                                {data.adopted ? "Adopted" : "Adopt"}
-                                            </button>
-                                            <button
                                                 onClick={() => {
                                                     scrollToTop();
                                                     onPetClick(data._id);

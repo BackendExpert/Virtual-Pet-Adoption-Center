@@ -14,16 +14,19 @@ const HomePage = () => {
 
     return (
         <div className='xl:px-40 md:px-10 px-4 md:pt-20 pt-16 bg-gray-200/60 min-h-screen pb-16'>
+
+            <h1 className="text-center md:text-4xl text-xl font-semibold text-gray-500">Virtual Pet Adoption Center</h1>
+
             <div className="flex justify-end mr-4">
+                <h1 className="mt-2 pr-4">For Adpot a Pet go to Quiz and Start</h1>
                 <a href="/Quiz">
-                    <DefultButton 
+                    <DefultButton
                         btntype={'button'}
                         text='Start Quiz'
                     />
                 </a>
-            </div>  
+            </div>
 
-            <h1 className="text-center md:text-4xl text-xl font-semibold text-gray-500">Virtual Pet Adoption Center</h1>
 
             <div className="">
                 <AddPetForm />

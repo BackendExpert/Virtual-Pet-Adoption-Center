@@ -166,7 +166,7 @@ const PetCard = ({ petId }) => {
                         </div>
 
                         {/* Adopted Checkbox */}
-                        <div>
+                        {/* <div>
                             <label className="flex items-center space-x-2">
                                 <input
                                     type="checkbox"
@@ -175,7 +175,7 @@ const PetCard = ({ petId }) => {
                                 />
                                 <span>Adopted</span>
                             </label>
-                        </div>
+                        </div> */}
 
                         {/* Submit Button */}
                         <DefultButton type="submit" text="Update Pet" />

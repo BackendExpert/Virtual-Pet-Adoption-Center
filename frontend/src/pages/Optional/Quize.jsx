@@ -98,6 +98,12 @@ const Quize = () => {
 
     return (
         <div className='xl:px-40 md:px-10 px-4 md:pt-20 pt-16 bg-gray-200/60 min-h-screen pb-16'>
+            <a href="/">
+                <DefultButton 
+                    btntype={'button'}
+                    text='Back'
+                />
+            </a>
             <h1 className="text-center md:text-4xl text-xl font-semibold text-gray-500">Start Quiz</h1>
             <p className="text-center text-gray-500 mt-4 mb-10">
                 Get a Pet According to Your Needs
