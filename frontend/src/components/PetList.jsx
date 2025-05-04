@@ -182,13 +182,6 @@ const PetList = ({ onPetClick }) => {
                             <p className="text-gray-500 text-sm">Adoption Date: {data.adoption_date ? formatDate(data.adoption_date) : '-'}</p>
                             <div className="mt-4 space-y-2">
                                 <button
-                                    className={`w-full py-2 rounded text-white ${data.adopted ? 'bg-gray-400' : 'bg-green-500'}`}
-                                    onClick={() => handleAdopt(data._id)}
-                                    disabled={data.adopted}
-                                >
-                                    {data.adopted ? "Adopted" : "Adopt"}
-                                </button>
-                                <button
                                     onClick={() => {
                                         scrollToTop();
                                         onPetClick(data._id);
