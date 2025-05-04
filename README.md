@@ -77,3 +77,25 @@ This is a full-stack web application developed using Node.js (Express) for the b
 
 The frontend should be available at `http://localhost:5173`.
 - if you start many project this port will change
+
+
+
+## 🔧 Features
+- Add new pet
+
+- View all pet
+
+- Update pet information
+
+- Delete pet
+
+- Adopt Pets
+
+- Genarate Apdotion Certificate
+
+- Get Notifications 
+
+
+## 🖼️ Screenshots
+
+- all screen shorts in /ScreenShot folder
