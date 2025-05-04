@@ -39,6 +39,8 @@ in backend/routes have 2 controllers
 - OPTRoute.js (all required task routes)
 - petRoute.js (all Bonus Features (Optional) task routes)
 
+- - other all task add with comments in code
+
 
 ## 🚀 Setup Instructions
 1. Clone the Repository
