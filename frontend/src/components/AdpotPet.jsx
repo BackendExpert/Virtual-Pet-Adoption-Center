@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-
 import { getCertificate, getOnePet } from '../services/api';
 import DefultInput from './Form/DefultInput';
 import DefultButton from './Buttons/DefultButton';
+import { triggerConfetti } from '../utils/Helper';
 
 const AdoptPet = ({ PetID }) => {
     const [onepet, setonepet] = useState(null);
@@ -29,25 +29,29 @@ const AdoptPet = ({ PetID }) => {
 
             // Check if the response is successful
             if (response.status === 200) {
-                // Create a link to download the PDF from the blob response
+                triggerConfetti(); //  Show confetti
+            
+                // ... your existing PDF logic
                 const blob = new Blob([response.data], { type: 'application/pdf' });
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-
-                // Set the file name for download (from response header or default name)
                 const disposition = response.headers['content-disposition'];
                 let filename = `Adoption_Certificate_${adoptby.byadopt}.pdf`;
                 if (disposition && disposition.includes('filename=')) {
                     filename = disposition.split('filename=')[1].replace(/["']/g, '');
                 }
-
+            
                 a.download = filename;
                 document.body.appendChild(a);
                 a.click();
                 a.remove();
                 window.URL.revokeObjectURL(url);
-                window.location.reload()
+            
+                // Optional: Delay reload to let user see the confetti
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
             } else {
                 // Handle if there is an issue with the response
                 alert("Failed to generate certificate. Please try again.");
