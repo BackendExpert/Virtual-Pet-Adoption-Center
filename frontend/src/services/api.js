@@ -37,3 +37,11 @@ export const filterPetMood = async (mood) => {
     return await axios.get(`${API_BASE_URL}/filter?mood=${mood}`)
 }
 
+
+// API BASE URL for Bonus Features (Optional)
+
+const API_BASE_URL_OPTIONAL = 'http://localhost:5000/optionaltask'; 
+
+export const quizMatch = async (data) => {
+    return await axios.post(`${API_BASE_URL_OPTIONAL}/quiz`, data)
+}

@@ -8,12 +8,9 @@ const OPTController = {
     getQuizResult: async(req, res) => {
         try{
             // answers of quiz
-            const quizAnswers = req.body.traits;
+            const quizAnswers = req.body;
 
-            const matchedPets = await Pet.find({
-                personality: { $in: quizAnswers },
-                adopted: false
-            })
+            const matchedPets = await Pet.find({ personality: { $in: quizAnswers }, adopted: false })
 
             res.json({ Status: 'Success', Result: matchedPets });
         }
