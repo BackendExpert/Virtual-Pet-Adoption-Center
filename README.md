@@ -27,6 +27,19 @@ This is a full-stack web application developed using Node.js (Express) for the b
 | `optionaltask/notifications`             | Optional task: Notifications       |
 | `optionaltask/confetti`             | Optional task: Confetti animations for celebrations (e.g., on adoption)       |
 
+### Important
+
+in backend/controllers have 2 controllers
+
+- petController.js (all required task according to the pet)
+- OPTController.js (all Bonus Features (Optional) task in here)
+
+in backend/routes have 2 controllers
+
+- OPTRoute.js (all required task routes)
+- petRoute.js (all Bonus Features (Optional) task routes)
+
+
 ## 🚀 Setup Instructions
 1. Clone the Repository
 
