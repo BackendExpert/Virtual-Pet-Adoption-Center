@@ -117,6 +117,22 @@ const OPTController = {
                 res.status(500).json({ error: "Something went wrong" });
             }
         }
+    },
+
+    petNotifications: async(req, res) => {
+        try{
+            const getsadpets = await Pet.find({ mood: 'Sad', adopted: false})
+
+            if(!getsadpets){
+                return res.json({ Error: "No Sad Pets All are Happy"})
+            }
+            else{
+                return res.json({ Result: getsadpets })
+            }
+        }
+        catch(err){
+            console.log(err)
+        }
     }
 };
 

@@ -42,10 +42,18 @@ export const filterPetMood = async (mood) => {
 
 const API_BASE_URL_OPTIONAL = 'http://localhost:5000/optionaltask'; 
 
+// for quiz
 export const quizMatch = async (data) => {
     return await axios.post(`${API_BASE_URL_OPTIONAL}/quiz`, data)
 }
 
+// for genarate Certificate of Apdotion
 export const getCertificate = async (id, data) => {
     return await axios.post(`${API_BASE_URL_OPTIONAL}/getCertificate/${id}`, data, { responseType: 'blob' })
+}
+
+// for get all notificaitons
+
+export const getallNotifications = async() => {
+    return await axios.get(`${API_BASE_URL_OPTIONAL}/petnotifications/`)
 }
