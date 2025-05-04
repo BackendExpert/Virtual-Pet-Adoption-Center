@@ -12,6 +12,21 @@ This is a full-stack web application developed using Node.js (Express) for the b
 - - ScreenShots (all Screen shot of the system)
 
 
+## 🌳 Branch-wise Development Workflow (total 10)
+
+| Branch Name        | Purpose                                              |
+|--------------------|------------------------------------------------------|
+| `master`             | Production-ready, fully tested codebase              |
+| `div`             | Development integration or staging branch              |
+| `backend/pet`          | Backend development with Express & MongoDB           |
+| `testing/pet`         | testing backend with `PostMan`                   |
+| `frontend/pet`   | Frontend development with React.js `(not in-use)`  |
+| `frontend/vite/pet`    | Migration or configuration using Vite + React.js    |
+| `optionaltask/PetPersonalityQuiz`             | Optional task: Implementing a pet personality quiz       |
+| `optionaltask/petAdpotCertificate`             | Optional task: Generating and downloading adoption certificates (PDF)       |
+| `optionaltask/notifications`             | Optional task: Notifications       |
+| `optionaltask/confetti`             | Optional task: Confetti animations for celebrations (e.g., on adoption)       |
+
 ## 🚀 Setup Instructions
 1. Clone the Repository
 
@@ -99,3 +114,5 @@ The frontend should be available at `http://localhost:5173`.
 ## 🖼️ Screenshots
 
 - all screen shorts in /ScreenShot folder
+
+
