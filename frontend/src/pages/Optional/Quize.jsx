@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { quizMatch } from '../../services/api';
 import Dropdown from '../../components/Form/Dropdown';
+import DefultButton from '../../components/Buttons/DefultButton';
+import AdpotPet from '../../components/AdpotPet';
 
 
 const Quize = () => {
@@ -85,6 +87,15 @@ const Quize = () => {
         }
     };
 
+    const scrollToTop = () => {
+        window.scrollTo({ top: 500, behavior: 'smooth' });
+    };
+
+    const [petadopt, setpetadopt] = useState(0)
+    const headleAdoptPet = (id) => {
+        setpetadopt(id)
+    }
+
     return (
         <div className='xl:px-40 md:px-10 px-4 md:pt-20 pt-16 bg-gray-200/60 min-h-screen pb-16'>
             <h1 className="text-center md:text-4xl text-xl font-semibold text-gray-500">Start Quiz</h1>
@@ -115,6 +126,10 @@ const Quize = () => {
                 </button>
             </form>
 
+            <div className="">
+                <AdpotPet PetID={petadopt} />
+            </div>
+
             {matchedPets.length > 0 && (
                 <div className="mt-16">
                     <h2 className="text-center text-2xl font-bold text-gray-700 mb-8">🐾 Matching Pets</h2>
@@ -131,6 +146,17 @@ const Quize = () => {
                                     <li><strong>Mood:</strong> <span className="text-gray-800">{pet.mood}</span></li>
                                     <li><strong>Status:</strong> <span className={`font-medium ${pet.adopted ? "text-green-600" : "text-red-500"}`}>{pet.adopted ? "Adopted" : "Available"}</span></li>
                                 </ul>
+
+                                <div className="mt-4">
+                                    <DefultButton
+                                        btntype={'button'}
+                                        text='Adopt this Pet'
+                                        onClick={() => {
+                                            scrollToTop();
+                                            headleAdoptPet(pet._id);
+                                        }}
+                                    />
+                                </div>
                             </div>
                         ))}
                     </div>
