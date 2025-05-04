@@ -34,7 +34,7 @@ in backend/controllers have 2 controllers
 - petController.js (all required task according to the pet)
 - OPTController.js (all Bonus Features (Optional) task in here)
 
-in backend/routes have 2 controllers
+in backend/routes have 2 routes
 
 - OPTRoute.js (all required task routes)
 - petRoute.js (all Bonus Features (Optional) task routes)
