@@ -95,7 +95,6 @@ const Quize = () => {
     const headleAdoptPet = (id) => {
         setpetadopt(id)
     }
-    
 
     return (
         <div className='xl:px-40 md:px-10 px-4 md:pt-20 pt-16 bg-gray-200/60 min-h-screen pb-16'>
