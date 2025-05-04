@@ -45,3 +45,7 @@ const API_BASE_URL_OPTIONAL = 'http://localhost:5000/optionaltask';
 export const quizMatch = async (data) => {
     return await axios.post(`${API_BASE_URL_OPTIONAL}/quiz`, data)
 }
+
+export const getCertificate = async (id, data) => {
+    return await axios.post(`${API_BASE_URL_OPTIONAL}/getCertificate/${id}`, data, { responseType: 'blob' })
+}
